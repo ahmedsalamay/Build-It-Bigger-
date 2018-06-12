@@ -4,6 +4,7 @@ package com.udacity.gradle.builditbigger;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.support.annotation.VisibleForTesting;
 import android.util.Pair;
 
 import com.google.api.client.extensions.android.http.AndroidHttp;
@@ -21,6 +22,11 @@ class EndpointsAsyncTask extends AsyncTask<Pair<Context, String>, Void, String> 
     private Context context;
     public String JOKE_EXTRA_KEY = "joke_key";
 
+    /*public EndpointsAsyncTask(Context context) {
+        this.context=context;
+    }*/
+    @VisibleForTesting
+    public boolean isTesting;
     @Override
     protected String doInBackground(Pair<Context, String>... params) {
         if (myApiService == null) {  // Only do this once
@@ -41,9 +47,6 @@ class EndpointsAsyncTask extends AsyncTask<Pair<Context, String>, Void, String> 
             myApiService = builder.build();
         }
 
-        context = params[0].first;
-        String name = params[0].second;
-
         try {
             return myApiService.tellJoke(new JokeBean()).execute().getJoke();
         } catch (IOException e) {
@@ -54,9 +57,12 @@ class EndpointsAsyncTask extends AsyncTask<Pair<Context, String>, Void, String> 
 
     @Override
     protected void onPostExecute(String result) {
-        Intent displayJokeIntent = new Intent(context, DisplayJokeActivity.class);
-        displayJokeIntent.putExtra(JOKE_EXTRA_KEY, result);
-        context.startActivity(displayJokeIntent);
+        if(!isTesting){
+            Intent displayJokeIntent = new Intent(context, DisplayJokeActivity.class);
+            displayJokeIntent.putExtra(JOKE_EXTRA_KEY, result);
+            context.startActivity(displayJokeIntent);
+        }
+
     }
 }
 
