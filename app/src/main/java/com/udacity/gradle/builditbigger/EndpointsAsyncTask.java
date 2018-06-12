@@ -43,7 +43,7 @@ class EndpointsAsyncTask extends AsyncTask<Pair<Context, String>, Void, String> 
                         }
                     });
             // end options for devappserver
-
+            context = params[0].first;
             myApiService = builder.build();
         }
 
