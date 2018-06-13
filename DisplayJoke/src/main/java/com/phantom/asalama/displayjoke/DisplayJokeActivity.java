@@ -3,6 +3,7 @@ package com.phantom.asalama.displayjoke;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.widget.TextView;
 
 public class DisplayJokeActivity extends AppCompatActivity {
@@ -14,7 +15,8 @@ public class DisplayJokeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display_joke);
-
+        getSupportActionBar().setHomeButtonEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         TextView jokeTxt=findViewById(R.id.joke);
 
         if(savedInstanceState==null){
@@ -37,5 +39,15 @@ public class DisplayJokeActivity extends AppCompatActivity {
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
         mJoke=savedInstanceState.getString(JOKE_EXTRA_KEY);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        super.onOptionsItemSelected(item);
+        if(item.getItemId()== android.R.id.home){
+            finish();
+        }
+        return true;
+
     }
 }

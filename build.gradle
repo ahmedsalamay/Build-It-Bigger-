@@ -19,6 +19,26 @@ allprojects {
         jcenter()
         google()
     }
+    task testAsyncBackend{
+        dependsOn "startEngine"
+        dependsOn ':app:connectedCheck'
+        finalizedBy "stopEngine"
+        doLast{
+            println "testing"
+        }
+    }
+    task startEngine{
+        dependsOn ':backend:appengineStart'
+        doLast{
+            println 'Start App Engine'
+        }
+    }
 
+    task stopEngine{
+        dependsOn ':backend:appengineStop'
+        doLast{
+            println 'Stop App Engine'
+        }
+    }
 
 }

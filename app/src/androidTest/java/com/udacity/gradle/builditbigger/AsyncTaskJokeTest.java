@@ -45,7 +45,5 @@ public class AsyncTaskJokeTest //extends ApplicationTestCase<Application>
             e.printStackTrace();
         }
         assertNotNull(joke);
-        assertEquals("Did you hear about the mathematician who's afraid of negative numbers ? "
-                +"He'll stop at nothing to avoid them", joke);
     }
 }

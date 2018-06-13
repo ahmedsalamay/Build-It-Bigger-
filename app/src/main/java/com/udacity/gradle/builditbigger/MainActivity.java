@@ -18,6 +18,7 @@ public class MainActivity extends AppCompatActivity {
 
     private Joker mJoker;
     public String JOKE_EXTRA_KEY="joke_key";
+    private boolean mClickedFlag=false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,8 +55,14 @@ public class MainActivity extends AppCompatActivity {
         //displayJokeIntent.putExtra(JOKE_EXTRA_KEY,mJoker.getJoke());
         //startActivity(displayJokeIntent);
         //Toast.makeText(this,mJoker.getJoke(), Toast.LENGTH_SHORT).show();
-        new EndpointsAsyncTask().execute(new Pair<Context, String>(this, "Manfred"));
+        if(!mClickedFlag)
+        new EndpointsAsyncTask(this).execute();
+        mClickedFlag=true;
     }
 
-
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mClickedFlag=false;
+    }
 }

@@ -22,9 +22,13 @@ class EndpointsAsyncTask extends AsyncTask<Pair<Context, String>, Void, String> 
     private Context context;
     public String JOKE_EXTRA_KEY = "joke_key";
 
-    /*public EndpointsAsyncTask(Context context) {
+    public EndpointsAsyncTask(){
+
+    }
+
+    public EndpointsAsyncTask(Context context) {
         this.context=context;
-    }*/
+    }
     @VisibleForTesting
     public boolean isTesting;
     @Override
@@ -43,7 +47,8 @@ class EndpointsAsyncTask extends AsyncTask<Pair<Context, String>, Void, String> 
                         }
                     });
             // end options for devappserver
-            context = params[0].first;
+            if(params.length!=0)
+                context = params[0].first;
             myApiService = builder.build();
         }
 
