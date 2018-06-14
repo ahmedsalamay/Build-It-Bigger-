@@ -1,29 +1,21 @@
 package com.udacity.gradle.builditbigger;
 
-import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Pair;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
-import com.phantom.asalama.javajokes.Joker;
-import com.phantom.asalama.displayjoke.DisplayJokeActivity;
 
 
 public class MainActivity extends AppCompatActivity {
 
-    private Joker mJoker;
     public String JOKE_EXTRA_KEY="joke_key";
     private boolean mClickedFlag=false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mJoker=new Joker();
     }
 
 
